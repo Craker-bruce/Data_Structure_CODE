@@ -4,6 +4,7 @@ int main()
 {
 	SeqList mylist;
 	SeqListInit(&mylist);
+
 	ElemType item;
 	int select = 1;
 	while (select)
@@ -25,15 +26,27 @@ int main()
 		switch (select)
 		{
 		case 1:
-			printf("请输入要插入的值[以-1结束]:>");
-			while (scanf("%d", &item), item != -1)
-			{
-				SeqListPushBack(&mylist,item);
-			}
+			//printf("请输入要插入的值[以-1结束]:>");
+			//while (scanf("%d", &item), item != -1)
+			//{
+			//	SeqListPushBack(&mylist,item);
+			//}
+			printf("请输入要插入的值:>");
+			scanf("%d", &item);
+			SeqListPushBack(&mylist,item);
 			break;
 		case 2:
+			//printf("请输入要插入的值[以-1结束]:>");
+			//while (scanf("%d", &item), item != -1)
+			//{
+			//	SeqListPushFront(&mylist, item);
+			//}
+			printf("请输入要插入的值:>");
+			scanf("%d", &item);
+			SeqListPushFront(&mylist, item);
 			break;
 		case 3:
+			SeqListShow(&mylist);
 			break;
 		case 4:
 			break;
@@ -63,6 +76,7 @@ int main()
 			break;
 		}
 	}
-
+	SeqListDestroy(&mylist);
+	printf("再见！\n");
 	return 0;
 }

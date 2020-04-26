@@ -1,4 +1,8 @@
-#pragma once
+//#pragma once
+#ifndef _SEQLIST_H_
+#define _SEQLIST_H_
+
+
 #include"common.h"
 #define SEQLIST_DEFAULT_SIZE 8
 
@@ -53,3 +57,43 @@ void SeqListPushBack(SeqList* pst, ElemType x)
 	}
 	pst->base[pst->size++] = x;
 }
+
+void SeqListPushFront(SeqList* pst, ElemType x)
+{
+	assert(pst != NULL);
+	if (IsFull(pst))
+	{
+		printf("顺序表空间已满，不能插入数据%d\n", x);
+		return;
+	}
+	for (size_t pos = pst->size; pos > 0; --pos)
+	{
+		pst->base[pos] = pst->base[pos - 1];
+	}
+	pst->base[0] = x;
+	pst->size++;
+}
+
+void SeqListShow(SeqList* pst)
+{
+	assert(pst != NULL);
+	for (size_t i = 0; i < pst->size; ++i)
+	{
+		printf("%d", pst->base[i]);
+	}
+	printf("\n");
+}
+
+void SeqListDestroy(SeqList* pst)
+{
+	assert(pst != NULL);
+	if (pst->base)
+		free(pst->base);
+	pst->base = NULL;
+	pst->capacity = pst->size = 0;
+}
+
+
+
+
+#endif // !_SEQLIST_H_
