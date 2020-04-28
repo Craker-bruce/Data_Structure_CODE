@@ -7,6 +7,9 @@ int main()
 
 	ElemType item;
 	int select = 1;
+	size_t pos = 0;
+	ElemType val = 0;
+	ElemType x = 0;
 	while (select)
 	{
 		printf("***********SeqList*************\n");
@@ -31,9 +34,11 @@ int main()
 			//{
 			//	SeqListPushBack(&mylist,item);
 			//}
-			printf("请输入要插入的值:>");
-			scanf("%d", &item);
-			SeqListPushBack(&mylist,item);
+			printf("请输入要插入的值,按-1结束:>");
+			while (scanf("%d", &item), item != -1)
+			{
+				SeqListPushBack(&mylist, item);
+			}
 			break;
 		case 2:
 			//printf("请输入要插入的值[以-1结束]:>");
@@ -49,12 +54,22 @@ int main()
 			SeqListShow(&mylist);
 			break;
 		case 4:
+			SeqListPopBack(&mylist);
 			break;
 		case 5:
+			SeqListPopFront(&mylist);
 			break;
 		case 6:
+			printf("请输入坐标pos的值以及要插入的值:>");
+			scanf("%d %d", &pos, &x);
+			SeqListInsertPos(&mylist, pos, x);
+			printf("插入成功!\n");
 			break;
 		case 7:
+			SeqListInsertVal(&mylist, val);
+			printf("请输入要插入的值:>");
+			scanf("%d", &val);
+			printf("插入成功!\n");
 			break;
 		case 8:
 			break;
@@ -72,8 +87,8 @@ int main()
 			break;
 		case 15:
 			break;
-		default:
-			break;
+			//default:
+			//	break;
 		}
 	}
 	SeqListDestroy(&mylist);
