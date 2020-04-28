@@ -19,14 +19,14 @@ typedef struct SeqList
 void SeqListInit(SeqList* pst);
 bool IsFull(SeqList* pst);
 bool IsEmpty(SeqList* pst);
-void SeqListPushBack(SeqList* pst, ElemType x);
-void SeqListPushFront(SeqList* pst, ElemType x);
-void SeqListShow(SeqList* pst);
+void SeqListPushBack(SeqList* pst, ElemType x);//1
+void SeqListPushFront(SeqList* pst, ElemType x);//2
+void SeqListShow(SeqList* pst);//3
 void SeqListDestroy(SeqList* pst);
-void SeqListPopBack(SeqList* pst);
-void SeqListPopFront(SeqList* pst);
-void SeqListInsertPos(SeqList* pst, size_t pos, ElemType x);
-void SeqListInsertVal(SeqList* pst,  ElemType val);
+void SeqListPopBack(SeqList* pst);//4
+void SeqListPopFront(SeqList* pst);//5
+void SeqListInsertPos(SeqList* pst, size_t pos, ElemType x);//6
+void SeqListInsertVal(SeqList* pst,  ElemType val);//7
 
 //////////////////////////////////
 //函数接口实现
@@ -50,7 +50,7 @@ bool IsEmpty(SeqList* pst)
 	assert(pst != NULL);
 	return pst->size == 0;
 }
-
+//1
 void SeqListPushBack(SeqList* pst, ElemType x)
 {
 	assert(pst != NULL);
@@ -61,7 +61,7 @@ void SeqListPushBack(SeqList* pst, ElemType x)
 	}
 	pst->base[pst->size++] = x;
 }
-
+//2
 void SeqListPushFront(SeqList* pst, ElemType x)
 {
 	assert(pst != NULL);
@@ -77,7 +77,7 @@ void SeqListPushFront(SeqList* pst, ElemType x)
 	pst->base[0] = x;
 	pst->size++;
 }
-
+//3
 void SeqListShow(SeqList* pst)
 {
 	assert(pst != NULL);
@@ -96,7 +96,7 @@ void SeqListDestroy(SeqList* pst)
 	pst->base = NULL;
 	pst->capacity = pst->size = 0;
 }
-
+//4
 void SeqListPopBack(SeqList* pst)
 {
 	assert(pst != NULL);
@@ -107,7 +107,7 @@ void SeqListPopBack(SeqList* pst)
 	}
 	pst->size--;
 }
-
+//5
 void SeqListPopFront(SeqList* pst)
 {
 	assert(pst != NULL);
@@ -122,7 +122,7 @@ void SeqListPopFront(SeqList* pst)
 	}
 	pst->size--;
 }
-
+//6
 void SeqListInsertPos(SeqList* pst, size_t pos, ElemType x)
 {
 	assert(pst != NULL);
@@ -142,7 +142,7 @@ void SeqListInsertPos(SeqList* pst, size_t pos, ElemType x)
 	pst->base[pos] = x;
 	pst->size++;
 }
-
+//7
 void SeqListInsertVal(SeqList* pst, ElemType val)
 {
 	assert(pst != NULL);
