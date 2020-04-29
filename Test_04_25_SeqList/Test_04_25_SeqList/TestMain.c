@@ -10,6 +10,7 @@ int main()
 	size_t pos = 0;
 	ElemType val = 0;
 	ElemType x = 0;
+	ElemType key = 0;
 	while (select)
 	{
 		printf("***********SeqList*************\n");
@@ -39,6 +40,7 @@ int main()
 			{
 				SeqListPushBack(&mylist, item);
 			}
+			printf("插入成功!\n");
 			break;
 		case 2:
 			//printf("请输入要插入的值[以-1结束]:>");
@@ -66,22 +68,34 @@ int main()
 			printf("插入成功!\n");
 			break;
 		case 7:
-			SeqListInsertVal(&mylist, val);
+			SeqListSort(&mylist);
 			printf("请输入要插入的值:>");
 			scanf("%d", &val);
+			SeqListInsertVal(&mylist, val);
 			printf("插入成功!\n");
 			break;
 		case 8:
+			printf("请输入要删除的坐标:>");
+			scanf("%d", &pos);
+			SeqListDeleteByPos(&mylist, pos);
+			printf("删除成功!\n");
 			break;
 		case 9:
+			printf("请输入要删除的值:>");
+			scanf("%d", &val);
+			SeqListDeleteByVal(&mylist, val);
+			printf("删除成功!\n");
 			break;
 		case 10:
+			SeqListFind(&mylist, key);
 			break;
 		case 11:
 			break;
 		case 12:
 			break;
 		case 13:
+			SeqListSort(&mylist);
+			printf("排序成功!\n");
 			break;
 		case 14:
 			break;

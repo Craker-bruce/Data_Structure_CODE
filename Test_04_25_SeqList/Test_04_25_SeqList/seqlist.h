@@ -26,7 +26,11 @@ void SeqListDestroy(SeqList* pst);
 void SeqListPopBack(SeqList* pst);//4
 void SeqListPopFront(SeqList* pst);//5
 void SeqListInsertPos(SeqList* pst, size_t pos, ElemType x);//6
-void SeqListInsertVal(SeqList* pst,  ElemType val);//7
+void SeqListInsertVal(SeqList* pst, ElemType val);//7
+void SeqListDeleteByPos(SeqList* pst, ElemType pos);//8
+void SeqListDeleteByVal(SeqList* pst, ElemType val);//9
+void SeqListFind(SeqList* pst, ElemType key);//10
+void SeqListSort(SeqList* pst);//13
 
 //////////////////////////////////
 //函数接口实现
@@ -149,6 +153,7 @@ void SeqListInsertVal(SeqList* pst, ElemType val)
 	if (IsFull(pst))
 	{
 		printf("顺序表已满，不可插入数据!\n");
+		return;
 	}
 	int end = pst->size;
 	while (end > 0 && val < pst->base[end - 1])
@@ -159,6 +164,90 @@ void SeqListInsertVal(SeqList* pst, ElemType val)
 	pst->base[end] = val;
 	pst->size++;
 }
+//8
+void SeqListDeleteByPos(SeqList* pst, ElemType pos)
+{
+	assert(pst != NULL);
+	if (IsEmpty(pst))
+	{
+		printf("顺序表已空，不可按坐标删除!\n");
+		return;
+	}
+	if (pos < 0 || pos >= pst->size)
+	{
+		printf("要删除数据的位置非法，不能按位置删除数据!\n");
+		return;
+	}
+	for (size_t i = pos; i < pst->size; ++i)
+	{
+		pst->base[i] = pst->base[i+1];
+	}
+	pst->size--;
+}
 
+//9
+void SeqListDeleteByVal(SeqList* pst, ElemType val)
+{
+	assert(pst != NULL);
+	if (IsEmpty(pst))
+	{
+		printf("顺序表已空，无法进行按值删除!\n");
+		return;
+	}
+	int pos = 0;
+	for (size_t i = 0; i < pst->size; ++i)
+	{
+		if (pst->base[i] == val)
+		{
+			int pos = i;
+			break;
+		}
+	}
+	for (size_t j = pos; j < pst->size; ++j)
+	{
+		pst->base[j] = pst->base[j + 1];
+	}
+	pst->size--;
+	printf("删除成功!\n");
+}
+//10
+void SeqListFind(SeqList* pst, ElemType key)
+{
+	assert(pst != NULL);
+	if (IsEmpty(pst))
+	{
+		printf("顺序表为空，查找失败!\n");
+		return;
+	}
+	for (size_t i = 0; i < pst->size; ++i)
+	{
+		if (key == pst->base[i])
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+//13 
+void SeqListSort(SeqList* pst)
+{
+	assert(pst != NULL);
+	if (pst->size <= 1)
+	{
+		return;
+	}
+	for (int i = 0; i < pst->size - 1; ++i)
+	{
+		for (int j = 0; j < pst->size - i - 1; ++j)
+		{
+			if (pst->base[j] > pst->base[j + 1])
+			{
+				ElemType tmp = pst->base[j];
+				pst->base[j] = pst->base[j + 1];
+				pst->base[j + 1] = tmp;
+			}
+		}
+	}
+}
 
 #endif // !_SEQLIST_H_
