@@ -19,6 +19,7 @@ typedef struct SeqList
 void SeqListInit(SeqList* pst);
 bool IsFull(SeqList* pst);
 bool IsEmpty(SeqList* pst);
+static bool _Inc(SeqList* pst);
 void SeqListPushBack(SeqList* pst, ElemType x);//1
 void SeqListPushFront(SeqList* pst, ElemType x);//2
 void SeqListShow(SeqList* pst);//3
@@ -29,8 +30,12 @@ void SeqListInsertPos(SeqList* pst, size_t pos, ElemType x);//6
 void SeqListInsertVal(SeqList* pst, ElemType val);//7
 void SeqListDeleteByPos(SeqList* pst, ElemType pos);//8
 void SeqListDeleteByVal(SeqList* pst, ElemType val);//9
-void SeqListFind(SeqList* pst, ElemType key);//10
+int SeqListFind(SeqList* pst, ElemType key);//10
+int SeqListLength(SeqList* pst);//11
+int SeqListCapacity(SeqList* pst);//12
 void SeqListSort(SeqList* pst);//13
+void SeqListReverse(SeqList* pst);//14
+void SeqListClear(SeqList* pst);//15
 
 //////////////////////////////////
 //函数接口实现
@@ -54,11 +59,23 @@ bool IsEmpty(SeqList* pst)
 	assert(pst != NULL);
 	return pst->size == 0;
 }
+static bool _Inc(SeqList* pst)
+{
+	ElemType* new_base = (ElemType*)realloc(pst->base, sizeof(ElemType) * pst->capacity * 2);
+	if (new_base == NULL)
+	{
+		return false;
+	}
+	pst->base = new_base;
+	pst->capacity *= 2;
+	return true;
+}
+
 //1
 void SeqListPushBack(SeqList* pst, ElemType x)
 {
 	assert(pst != NULL);
-	if (IsFull(pst))
+	if (IsFull(pst)&&!_Inc(pst))
 	{
 		printf("顺序表空间已满，不能插入数据%d\n", x);
 		return;
@@ -69,7 +86,7 @@ void SeqListPushBack(SeqList* pst, ElemType x)
 void SeqListPushFront(SeqList* pst, ElemType x)
 {
 	assert(pst != NULL);
-	if (IsFull(pst))
+	if (IsFull(pst)&&!_Inc(pst))
 	{
 		printf("顺序表空间已满，不能插入数据%d\n", x);
 		return;
@@ -135,7 +152,7 @@ void SeqListInsertPos(SeqList* pst, size_t pos, ElemType x)
 		printf("要插入数据的位置非法,无法插入!\n");
 		return;
 	}
-	if (IsFull(pst))
+	if (IsFull(pst) && !_Inc(pst))
 	{
 		printf("顺序表已满，不可插入数据源!\n");
 	}
@@ -150,7 +167,7 @@ void SeqListInsertPos(SeqList* pst, size_t pos, ElemType x)
 void SeqListInsertVal(SeqList* pst, ElemType val)
 {
 	assert(pst != NULL);
-	if (IsFull(pst))
+	if (IsFull(pst) && !_Inc(pst))
 	{
 		printf("顺序表已满，不可插入数据!\n");
 		return;
@@ -180,7 +197,7 @@ void SeqListDeleteByPos(SeqList* pst, ElemType pos)
 	}
 	for (size_t i = pos; i < pst->size; ++i)
 	{
-		pst->base[i] = pst->base[i+1];
+		pst->base[i] = pst->base[i + 1];
 	}
 	pst->size--;
 }
@@ -194,24 +211,17 @@ void SeqListDeleteByVal(SeqList* pst, ElemType val)
 		printf("顺序表已空，无法进行按值删除!\n");
 		return;
 	}
-	int pos = 0;
-	for (size_t i = 0; i < pst->size; ++i)
+	int pos = SeqListFind(pst, val);
+	if (pos == -1)
 	{
-		if (pst->base[i] == val)
-		{
-			int pos = i;
-			break;
-		}
+		printf("要删除的数据不存在，不能进行删除操作!\n");
+		return;
 	}
-	for (size_t j = pos; j < pst->size; ++j)
-	{
-		pst->base[j] = pst->base[j + 1];
-	}
-	pst->size--;
+	SeqListDeleteByPos(pst, pos);
 	printf("删除成功!\n");
 }
 //10
-void SeqListFind(SeqList* pst, ElemType key)
+int SeqListFind(SeqList* pst, ElemType key)
 {
 	assert(pst != NULL);
 	if (IsEmpty(pst))
@@ -227,6 +237,20 @@ void SeqListFind(SeqList* pst, ElemType key)
 		}
 	}
 	return -1;
+}
+//11
+int SeqListLength(SeqList* pst)
+{
+	assert(pst != NULL);
+	int i = 0;
+	i = pst->size;
+	return i;
+}
+//12
+int SeqListCapacity(SeqList* pst)
+{
+	assert(pst != NULL);
+	return pst->capacity;
 }
 //13 
 void SeqListSort(SeqList* pst)
@@ -249,5 +273,27 @@ void SeqListSort(SeqList* pst)
 		}
 	}
 }
-
+//14
+void SeqListReverse(SeqList* pst)
+{
+	assert(pst != NULL);
+	/*if (pst->size < 2);
+	{
+		return;
+	}*/
+	int left = 0;
+	int right = pst->size - 1;
+	while(left<right)
+	{
+		Swap(&pst->base[left], &pst->base[right]);
+		left++;
+		right--;
+	}
+}
+//15
+void SeqListClear(SeqList* pst)
+{
+	assert(pst != NULL);
+	pst->size = 0;
+}
 #endif // !_SEQLIST_H_

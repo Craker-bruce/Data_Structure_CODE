@@ -11,6 +11,7 @@ int main()
 	ElemType val = 0;
 	ElemType x = 0;
 	ElemType key = 0;
+	ElemType res = 0;
 	while (select)
 	{
 		printf("***********SeqList*************\n");
@@ -22,6 +23,7 @@ int main()
 		printf("*[11] length     [12] capacity *\n");
 		printf("*[13] sort       [14] reverse  *\n");
 		printf("*[15] clear      [0]quit_system*\n");
+		printf("*[16] remove_all 自己实现      *\n");
 		printf("********************************\n");
 		printf("请选择:>");
 		scanf("%d", &select);
@@ -43,14 +45,14 @@ int main()
 			printf("插入成功!\n");
 			break;
 		case 2:
-			//printf("请输入要插入的值[以-1结束]:>");
-			//while (scanf("%d", &item), item != -1)
-			//{
-			//	SeqListPushFront(&mylist, item);
-			//}
-			printf("请输入要插入的值:>");
+			printf("请输入要插入的值[以-1结束]:>");
+			while (scanf("%d", &item), item != -1)
+			{
+				SeqListPushFront(&mylist, item);
+			}
+			/*printf("请输入要插入的值:>");
 			scanf("%d", &item);
-			SeqListPushFront(&mylist, item);
+			SeqListPushFront(&mylist, item);*/
 			break;
 		case 3:
 			SeqListShow(&mylist);
@@ -84,22 +86,39 @@ int main()
 			printf("请输入要删除的值:>");
 			scanf("%d", &val);
 			SeqListDeleteByVal(&mylist, val);
-			printf("删除成功!\n");
 			break;
 		case 10:
-			SeqListFind(&mylist, key);
+			printf("请输入要查找的数值:>");
+			scanf("%d", &key);
+			res = SeqListFind(&mylist, key);
+			if (res == -1)
+			{
+				printf("要查找的值不存在!\n");
+			}
+			else
+			{
+				printf("要查找的位置为：%d\n", res);
+			}
 			break;
 		case 11:
+			val = SeqListLength(&mylist);
+			printf("顺序表的长度为:%d\n", val);
 			break;
 		case 12:
+			printf("SeqList Capacity = %d\n", SeqListCapacity(&mylist));
 			break;
 		case 13:
 			SeqListSort(&mylist);
 			printf("排序成功!\n");
 			break;
 		case 14:
+			SeqListShow(&mylist);
+			SeqListReverse(&mylist);
+			SeqListShow(&mylist);
 			break;
 		case 15:
+			SeqListClear(&mylist);
+			printf("清理数据成功!\n");
 			break;
 			//default:
 			//	break;
