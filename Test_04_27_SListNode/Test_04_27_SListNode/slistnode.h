@@ -22,6 +22,8 @@ void SListPushFront(SList* plist, ElemType item);//2
 void SListShow(SList* plist);//3
 void SListPopBack(SList* plist);//4
 void SListPopFront(SList* plist);//5
+void SListInsertVal(SList* plist, ElemType val);//7
+void SListSort(SList* plist);//13
 
 ///////////////////////////////////////////
 ///////////////////////////////////////////
@@ -114,5 +116,13 @@ void SListPopFront(SList* plist)
 	}
 	plist->head = p->next;
 	free(p);
+}
+//6
+//7
 
+
+//13
+void SListSort(SList* plist)
+{
+	assert(plist != NULL);
 }

@@ -61,10 +61,10 @@ int main()
 			printf("插入成功!\n");
 			break;
 		case 7:
-			//SListSort(&mylist);
+			SListSort(&mylist);
 			printf("请输入要插入的值:>");
 			scanf("%d", &val);
-			//SListInsertVal(&mylist, val);
+			SListInsertVal(&mylist, val);
 			printf("插入成功!\n");
 			break;
 		case 8:
@@ -99,7 +99,7 @@ int main()
 			//printf("SList Capacity = %d\n", SListCapacity(&mylist));
 			break;
 		case 13:
-			//SListSort(&mylist);
+			SListSort(&mylist);
 			printf("排序成功!\n");
 			break;
 		case 14:
