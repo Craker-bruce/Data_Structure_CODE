@@ -12,7 +12,7 @@ int main()
 	ElemType x = 0;
 	ElemType key = 0;
 	ElemType res = 0;
-	while (select)
+	while (select)      
 	{
 		printf("***********SeqList*************\n");
 		printf("*[1] push_back   [2] push_front*\n");
