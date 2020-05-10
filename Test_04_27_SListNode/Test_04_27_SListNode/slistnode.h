@@ -118,10 +118,12 @@ void SListPopFront(SList* plist)
 	free(p);
 }
 //6
+
 //7
+
 //13
 void SListSort(SList* plist)
 {
 	assert(plist != NULL);
 }   
-         
+      
