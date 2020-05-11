@@ -5,7 +5,7 @@ int main()
 	DCList mylist;
 	DCListInit(&mylist);
 
-	DCListNode* p = NULL;
+	DCListNode* p;
 	ElemType item, key;
 	int select = 1;
 	int pos = 0;
@@ -42,15 +42,16 @@ int main()
 			{
 				DCListPushFront(&mylist, item);
 			}
+			printf("插入成功.\n");
 			break;
 		case 3:
 			DCListShow(&mylist);
 			break;
 		case 4:
-			//DCListPopBack(&mylist);
+			DCListPopBack(&mylist);
 			break;
 		case 5:
-			//DCListPopFront(&mylist);
+			DCListPopFront(&mylist);
 			break;
 		case 6:
 			printf("请输入要插入的位置:>");
@@ -60,10 +61,10 @@ int main()
 			//SeqListInsertByPos(&mylist, pos, item);
 			break;
 		case 7:
-			//DCListSort(&mylist);
+			DCListSort(&mylist);
 			printf("请输入要插入的数据:>");
 			scanf("%d", &item);
-			//DCListInsertByVal(&mylist, item);
+			DCListInsertByVal(&mylist, item);
 			break;
 		case 8:
 			printf("请输入要删除的位置:>");
@@ -73,32 +74,34 @@ int main()
 		case 9:
 			printf("请输入要删除的值:>");
 			scanf("%d", &key);
-			//DCListDeleteByVal(&mylist, key);
+			DCListDeleteByVal(&mylist, key);
+			printf("删除成功.\n");
 			break;
 		case 10:
 			printf("请输入要查找的值:>");
 			scanf("%d", &key);
-			//p = DCListFind(&mylist, key);
+			p = DCListFind(&mylist, key);
 			if (p == NULL)
 				printf("要查找的值不存在.\n");
 			else
 				printf("要查找的值为:> %d\n", p->data);
 			break;
 		case 11:
-			//printf("seqlist len = %d\n", DCListLength(&mylist));
+			printf("seqlist len = %d\n", DCListLength(&mylist));
 			break;
 		case 12:
 			//printf("seqlist capacity = %d\n", SeqListCapacity(&mylist));
 			break;
 		case 13:
-			//DCListSort(&mylist);
+			DCListSort(&mylist);
 			printf("顺序表排序成功......\n");
 			break;
 		case 14:
-			//DCListReverse(&mylist);
+			DCListReverse(&mylist);
+			printf("转置成功.\n");
 			break;
 		case 15:
-			//DCListClear(&mylist);
+			DCListClear(&mylist);
 			printf("清除数据表成功......\n");
 			break;
 		case 16:
@@ -108,7 +111,7 @@ int main()
 			break;
 		}
 	}
-	//DCListDestroy(&mylist);
+	DCListDestroy(&mylist);
 	printf("GoodBye......\n");
 	return 0;
 }
