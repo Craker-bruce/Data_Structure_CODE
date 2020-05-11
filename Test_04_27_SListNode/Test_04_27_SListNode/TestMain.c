@@ -1,9 +1,11 @@
 #include"slistnode.h"
 
+
 int main()
 {
 	SList mylist;
 	SListInit(&mylist);
+	SListNode* p;
 	ElemType item;
 	int select = 1;
 	size_t pos = 0;
@@ -76,23 +78,23 @@ int main()
 		case 9:
 			printf("请输入要删除的值:>");
 			scanf("%d", &val);
-			//SqListDeleteByVal(&mylist, val);
+			SqListDeleteByVal(&mylist, val);
 			break;
 		case 10:
 			printf("请输入要查找的数值:>");
 			scanf("%d", &key);
-			//res = SListFind(&mylist, key);
-			if (res == -1)
+			p = SListFind(&mylist, key);
+			if (p == NULL)
 			{
 				printf("要查找的值不存在!\n");
 			}
 			else
 			{
-				printf("要查找的位置为：%d\n", res);
+				printf("要查找的值为：%d\n", p->data);
 			}
 			break;
 		case 11:
-			//val = SListLength(&mylist);
+			val = SListLength(&mylist);
 			printf("顺序表的长度为:%d\n", val);
 			break;
 		case 12:
@@ -103,19 +105,35 @@ int main()
 			printf("排序成功!\n");
 			break;
 		case 14:
-			//SListShow(&mylist);
-			//SListReverse(&mylist);
-			//SListShow(&mylist);
+			SListShow(&mylist);
+			SListReverse(&mylist);
+			SListShow(&mylist);
 			break;
 		case 15:
-			//SListClear(&mylist);
+			SListClear(&mylist);
 			printf("清理数据成功!\n");
 			break;
 			//default:
 			//	break;
 		}
 	}
-	//SListDestroy(&mylist);
+	SListDestroy(&mylist);
 	printf("再见！\n");
 	return 0;
 }
+
+
+/*
+void Test_List()
+{
+	List mylist;
+	ListInit(&mylist);
+	ListCreate_Tail(&mylist);
+	ListCreate_Head(&mylist);
+	ListShow(mylist);
+}
+void main()
+{
+	Test_List();
+}
+*/
