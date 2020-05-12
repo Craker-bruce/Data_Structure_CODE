@@ -212,13 +212,12 @@ void DCListSort(DCList* plist)
 	}
 }
 
-//14
+//14  
 void DCListReverse(DCList* plist)
 {
 	assert(plist != NULL);
 	DCListNode* p = plist->head->next;
 	DCListNode* q = p->next;
-
 	//¶Ï¿ªÁ´±í
 	p->next = plist->head;
 	plist->head->prev = p;
