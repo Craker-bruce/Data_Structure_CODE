@@ -123,4 +123,5 @@ void SListDestory(SList* plist)
 {
 	SListClear(plist);
 	plist->head = NULL;
+
 }
