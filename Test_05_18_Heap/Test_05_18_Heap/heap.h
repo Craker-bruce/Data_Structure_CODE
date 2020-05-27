@@ -9,3 +9,8 @@ typedef struct Heap
 	int capacity;
 	int size;
 }Heap;
+int main()
+{
+	
+}
+
